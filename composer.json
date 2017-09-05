@@ -1,0 +1,21 @@
+{
+    "name": "yii2learning/yii2-chart-builder",
+    "description": "create chart from sql ",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","chart","builder"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sathit Seethaphon",
+            "email": "dixonsatit@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "yii2learning\\": ""
+        }
+    }
+}
