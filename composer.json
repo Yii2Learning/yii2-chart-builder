@@ -2,20 +2,24 @@
     "name": "yii2learning/yii2-chart-builder",
     "description": "create chart from sql ",
     "type": "yii2-extension",
-    "keywords": ["yii2","extension","chart","builder"],
+    "keywords": ["yii2", "extension", "chart", "builder"],
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Sathit Seethaphon",
-            "email": "dixonsatit@gmail.com"
-        }
-    ],
+    "authors": [{
+        "name": "Sathit Seethaphon",
+        "email": "dixonsatit@gmail.com"
+    }],
     "require": {
-        "yiisoft/yii2": "*"
+        "yiisoft/yii2": "*",
+        "thamtech/yii2-uuid": "*",
+        "2amigos/yii2-chartjs-widget": "~2.0",
+        "miloschuman/yii2-highcharts-widget": "^5.0",
+        "trntv/yii2-aceeditor": "^2.0.0",
+        "kartik-v/yii2-grid": "@dev",
+        "vova07/yii2-imperavi-widget": "*"
     },
     "autoload": {
         "psr-4": {
-            "yii2learning\\": ""
+            "yii2learning\\chartbuilder\\": ""
         }
     }
 }
