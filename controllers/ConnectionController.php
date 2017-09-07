@@ -70,13 +70,7 @@ class ConnectionController extends Controller
         ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            try{
-                $con = Connection::getConnection($model->id);
-                Yii::$app->session->setFlash('success', 'Connection Successful');
-            } catch(\yii\db\Exception $e) {
-                Yii::$app->session->setFlash('warning', $e->getMessage());
-            }
-           
+            $this->openConection($model->id);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -96,17 +90,24 @@ class ConnectionController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            try{
-                $con = Connection::getConnection($model->id);
-                Yii::$app->session->setFlash('success', 'Connection Successful');
-            } catch(\yii\db\Exception $e) {
-                Yii::$app->session->setFlash('warning', $e->getMessage());
-            }
+            $this->openConection($model->id);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
+        }
+    }
+
+    public function openConection($connection_id){
+        try{
+            $con = Connection::getConnection($connection_id);
+            $con->open();
+            Yii::$app->session->setFlash('success', 'Connection Successful');
+            $con->close();
+        } catch(\yii\db\Exception $e) {
+            $con->close();
+            Yii::$app->session->setFlash('warning', $e->getMessage());
         }
     }
 
