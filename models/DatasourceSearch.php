@@ -18,7 +18,7 @@ class DatasourceSearch extends Datasource
     public function rules()
     {
         return [
-            [['id', 'name', 'query', 'hospcode', 'params', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'name', 'query', 'params', 'created_at', 'updated_at'], 'safe'],
             [['created_by', 'updated_by'], 'integer'],
         ];
     }
@@ -68,7 +68,6 @@ class DatasourceSearch extends Datasource
         $query->andFilterWhere(['like', 'id', $this->id])
             ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'query', $this->query])
-            ->andFilterWhere(['like', 'hospcode', $this->hospcode])
             ->andFilterWhere(['like', 'params', $this->params]);
 
         return $dataProvider;

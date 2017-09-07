@@ -14,7 +14,7 @@ use yii\widgets\Pjax;
 /* @var $model frontend\modules\dashboard\models\Chart */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'รายงาน', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Charts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'แก้ไข';
 ?>

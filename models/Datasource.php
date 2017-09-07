@@ -3,6 +3,11 @@
 namespace yii2learning\chartbuilder\models;
 
 use Yii;
+use yii\db\Expression;
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\AttributeBehavior;
 
 /**
  * This is the model class for table "{{%cb_datasource}}".
@@ -10,7 +15,6 @@ use Yii;
  * @property string $id
  * @property string $name
  * @property string $query
- * @property string $hospcode
  * @property string $params
  * @property string $created_at
  * @property string $updated_at
@@ -27,19 +31,47 @@ class Datasource extends \yii\db\ActiveRecord
         return '{{%cb_datasource}}';
     }
 
+    public function behaviors(){
+        return [
+            BlameableBehavior::className(),
+            [
+                'class' => TimestampBehavior::className(),
+                'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'id',
+                ],
+                'value' => function ($event) {
+                    return \thamtech\uuid\helpers\UuidHelper::uuid();
+                },
+            ],
+            [
+                'class' => AttributeBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'params',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'params'
+                ],
+                'value' => function ($event) {
+                    return  is_array($this->params) ? implode(',',$this->params) : $this->params;
+                },
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id'], 'required'],
+            [['name','query'], 'required'],
             [['query', 'params'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['created_by', 'updated_by'], 'integer'],
-            [['id'], 'string', 'max' => 36],
-            [['name'], 'string', 'max' => 255],
-            [['hospcode'], 'string', 'max' => 5],
+            [['id','connection_id'], 'string', 'max' => 36],
+            [['name'], 'string', 'max' => 255]
         ];
     }
 
@@ -52,7 +84,6 @@ class Datasource extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'query' => Yii::t('app', 'Query'),
-            'hospcode' => Yii::t('app', 'Hospcode'),
             'params' => Yii::t('app', 'Params'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
@@ -69,4 +100,19 @@ class Datasource extends \yii\db\ActiveRecord
     {
         return new DatasourceQuery(get_called_class());
     }
+
+
+    public function prepareParams(){
+          $newParams = [];
+          $keys = [];
+          if(is_array($this->params)){
+              foreach($this->params as $value){
+                $v = str_replace(':','',$value);
+                if(in_array($v,$keys)){
+                  $newParams[$value] = $this->filterModel->attributes[$v];
+                }
+              }
+          }
+          return  $newParams;
+      }
 }

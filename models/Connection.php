@@ -120,6 +120,10 @@ class Connection extends \yii\db\ActiveRecord
     }
 
     public static function getConnection($id){
+        if($id==='db'){
+            return Yii::$app->db;
+        }
+
         $connectDsnTemplate = '{driver}:host={host};dbname={database};port={port}';
         $con =   static::findOne($id);
         if($con !== null){
@@ -136,12 +140,8 @@ class Connection extends \yii\db\ActiveRecord
                 'charset' => $con->charset
               ]);
         }else{
-            if($id==='db'){
-                return Yii::$app->db;
-            }else{
                 Yii::$app->session->setFlash('warning','The requested Connection name does not exist');
                 return false;
-            }
         }
     }
 

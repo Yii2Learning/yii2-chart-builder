@@ -4,10 +4,12 @@ namespace yii2learning\chartbuilder\controllers;
 
 use Yii;
 use yii2learning\chartbuilder\models\Datasource;
+use yii2learning\chartbuilder\models\Connection;
 use yii2learning\chartbuilder\models\DatasourceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\SqlDataProvider;
 
 /**
  * DatasourceController implements the CRUD actions for Datasource model.
@@ -63,10 +65,12 @@ class DatasourceController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Datasource();
+        $model = new Datasource([
+            'connection_id'=>'db'
+        ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,10 +89,18 @@ class DatasourceController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
+            $con =  Connection::getConnection($model->connection_id);
+            $dataProvider = new SqlDataProvider([
+                'sql' => $model->query,
+                'db' => $con,
+                // 'params' => $this->prepareParams(),
+                'pagination'=>false
+            ]);
             return $this->render('update', [
                 'model' => $model,
+                'dataProvider'=>$dataProvider
             ]);
         }
     }

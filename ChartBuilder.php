@@ -4,6 +4,7 @@ namespace yii2learning\chartbuilder;
 
 use Yii;
 use yii\base\Widget;
+use yii\base\InvalidConfigException;
 use yii2learning\chartbuilder\models\Chart;
 use yii2learning\chartbuilder\models\chartType;
 use yii2learning\chartbuilder\models\Datasource;
@@ -18,10 +19,14 @@ class ChartBuilder extends Widget
     public $filterModel;
     public $title;
 
-
     public function init()
     {
         parent::init();
+
+        if ($this->chartId === null) {
+            throw new InvalidConfigException('The "chart id" property must be set.');
+        }
+        
         if($this->model === null) {
             $this->getModel();
             $this->model->execute();
