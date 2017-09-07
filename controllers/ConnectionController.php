@@ -70,6 +70,13 @@ class ConnectionController extends Controller
         ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            try{
+                $con = Connection::getConnection($model->id);
+                Yii::$app->session->setFlash('success', 'Connection Successful');
+            } catch(\yii\db\Exception $e) {
+                Yii::$app->session->setFlash('warning', $e->getMessage());
+            }
+           
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -89,6 +96,12 @@ class ConnectionController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            try{
+                $con = Connection::getConnection($model->id);
+                Yii::$app->session->setFlash('success', 'Connection Successful');
+            } catch(\yii\db\Exception $e) {
+                Yii::$app->session->setFlash('warning', $e->getMessage());
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
