@@ -6,7 +6,10 @@ use yii\widgets\Pjax;
 <?= Highcharts::widget([
     'options' => [
         'chart' => ['type' => 'pie'],
-        'title' => ['text' => $title],
+        'title' => ['text' => $model->title],
+        'subtitle'=> [
+          'text' => $model->sub_title
+        ],
         'tooltip' => [
             'headerFormat' => '<span style="">{series.name}</span><br>',
             'pointFormat' => '<span style="color:{point.color}">{point.name}</span><br>ร้อยละ: <b>{point.percentage:.1f}%</b><br/>'

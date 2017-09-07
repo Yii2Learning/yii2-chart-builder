@@ -47,7 +47,6 @@ use  yii2learning\chartbuilder\models\Datasource;
  * @property string $title
  * @property string $sub_title
  * @property string $latest_data
- * @property integer $is_kpi
  * @property string $params
  *
  * @property ChartType $chartType
@@ -133,11 +132,11 @@ class Chart extends \yii\db\ActiveRecord
         return [
             [['name','detail','tag_name'], 'required'],
             [['tag_name'], 'unique'],
-            [[ 'created_by', 'updated_by','stacked','is_kpi'], 'integer'],
+            [[ 'created_by', 'updated_by','stacked'], 'integer'],
             [['detail','query','options'], 'string'],
-            [['id','datasource_id'], 'string', 'max' => 36],
+            [['id','datasource_id','connection_id'], 'string', 'max' => 36],
             [['created_at', 'updated_at','display_type','datasource_type','series','latest_data','params','bindingParams'], 'safe'],
-            [['name','xaxis_label','yaxis_label','tag_name'], 'string', 'max' => 255],
+            [['name','xaxis_label','yaxis_label','tag_name','title','sub_title'], 'string', 'max' => 255],
             [['chart_type','xaxis'], 'string', 'max' => 100],
         ];
     }
@@ -146,8 +145,7 @@ class Chart extends \yii\db\ActiveRecord
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_DETAIL] = ['name', 'detail','tag_name'];
-        $scenarios[self::SCENARIO_DATASOURCE] = ['datasource_type', 'datasource_id', 'query','params'];
-        $scenarios[self::SCENARIO_DISPLAY] = [ 'display_type', 'chart_type','xaxis_label','yaxis_label','xaxis','series'];
+        $scenarios[self::SCENARIO_DATASOURCE] = ['datasource_type', 'datasource_id', 'query','params','title','sub_title'];
         return $scenarios;
     }
 
@@ -184,7 +182,6 @@ class Chart extends \yii\db\ActiveRecord
             'title' => Yii::t('app', 'Title'),
             'sub_title' => Yii::t('app', 'Sub Title'),
             'latest_data' => Yii::t('app', 'Latest Data'),
-            'is_kpi' => Yii::t('app', 'Is Kpi'),
             'params' => Yii::t('app', 'Params'),
         ];
     }
@@ -312,18 +309,25 @@ class Chart extends \yii\db\ActiveRecord
              $this->InitFilterModel();
              $sql = $this->getSqlCommand();
              if(!empty($sql)){
-                 $command = Yii::$app->db->createCommand($sql);
+                 $con = $this->getConnection($this->connection_id);
+                 $command = $con->createCommand($sql);
                  $command = $this->bindingParams($command);
                  $this->data = $command->queryAll();
              }
              return $this->data;
          } catch(\yii\db\Exception $e) {
-             Yii::$app->session->setFlash('warning',VarDumper::dumpAsString([
-                 'error'=>$e->getMessage(),
-                 'data'=>$this->bindingParams
-             ],10,true));
+             Yii::$app->session->setFlash('warning', $e->getMessage());
              return [];
          }
+     }
+
+     public function getConnection($id){
+        try{
+         return Connection::getConnection($id);
+        } catch(\yii\db\Exception $e) {
+            Yii::$app->session->setFlash('warning', $e->getMessage());
+            return null;
+        }
      }
    
      public function bindingParams($command){

@@ -13,7 +13,10 @@ $this->registerJsFile('https://code.highcharts.com/modules/solid-gauge.js', [
 $userOptions = $model->getOptions();
 $options = array_merge([
   'credits' => ['enabled' => false],
-  'title' => ['text' =>$title],
+  'title' => ['text' => $model->title],
+  'subtitle'=> [
+    'text' => $model->sub_title
+  ],
   'chart'=>[
     'spacingBottom'=>-170,
     'type' => 'gauge',

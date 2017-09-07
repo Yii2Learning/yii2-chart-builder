@@ -19,7 +19,7 @@ class ChartSearch extends Chart
     {
         return [
             [['id', 'name', 'detail', 'chart_type', 'datasource_id', 'datasource_type', 'tag_name', 'display_type', 'result_id', 'created_at', 'updated_at', 'hospcode', 'query', 'condition', 'options', 'xaxis', 'xaxis_label', 'series', 'yaxis_label', 'title', 'sub_title', 'latest_data', 'params'], 'safe'],
-            [['created_by', 'updated_by', 'stacked', 'is_kpi'], 'integer'],
+            [['created_by', 'updated_by', 'stacked'], 'integer'],
             [['result', 'target_value'], 'number'],
         ];
     }
@@ -66,8 +66,7 @@ class ChartSearch extends Chart
             'updated_by' => $this->updated_by,
             'result' => $this->result,
             'target_value' => $this->target_value,
-            'stacked' => $this->stacked,
-            'is_kpi' => $this->is_kpi,
+            'stacked' => $this->stacked
         ]);
 
         $query->andFilterWhere(['like', 'id', $this->id])

@@ -12,10 +12,12 @@ use yii\web\NotFoundHttpException;;
 class ChartBuilder extends Widget
 {
     public $chartId;
+    public $filter = [];
     public $model = null;
     public $dataProvider;
     public $filterModel;
     public $title;
+
 
     public function init()
     {

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use  yii2learning\chartbuilder\ChartBuilder;
 
 /* @var $this yii\web\View */
 /* @var $model yii2learning\chartbuilder\models\Chart */
@@ -14,49 +15,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
+    <div class="panel panel-default panel-body">
+<?= ChartBuilder::widget([
+            'chartId' => $model->id,
+            'model' => $model,
+            'title'=>$model->name,
+            'filterModel' => $filterModel
+        ]); ?>
+</div>
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'name',
-            'detail:ntext',
-            'chart_type',
-            'datasource_id',
-            'datasource_type',
-            'tag_name',
-            'display_type',
-            'result_id',
-            'created_at',
-            'updated_at',
-            'created_by',
-            'updated_by',
-            'hospcode',
-            'query:ntext',
-            'result',
-            'target_value',
-            'condition:ntext',
-            'options:ntext',
-            'xaxis',
-            'xaxis_label',
-            'series',
-            'stacked',
-            'yaxis_label',
-            'title',
-            'sub_title',
-            'latest_data:ntext',
-            'is_kpi',
-            'params:ntext',
+            'detail:html'
         ],
     ]) ?>
 

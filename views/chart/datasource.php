@@ -8,6 +8,7 @@ use kartik\select2\Select2;
 use kartik\depdrop\DepDrop;
 use  yii2learning\chartbuilder\models\ChartType;
 use  yii2learning\chartbuilder\models\Datasource;
+use  yii2learning\chartbuilder\models\Connection;
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\dashboard\models\Chart */
 $this->title = $model->name;
@@ -29,14 +30,21 @@ $this->params['breadcrumbs'][] = 'แก้ไข';
             <div class="col-md-5">
                 <?= $form->field($model, 'datasource_id')->widget(Select2::classname(), [
                         'data' => Datasource::find()->select('name')->indexBy('id')->column(),
-                        'options' => ['id'=>'dd-datasource_id','placeholder' => 'เลือกจังหวัด ...'],
+                        'options' => ['id'=>'dd-datasource_id','placeholder' => 'Select Datasource ...'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
                 ]); ?>
             </div>
        </div>
-
+       <?= $form->field($model, 'connection_id')->widget(Select2::classname(), [
+                        'data' => array_merge(['db'=>'Defalut'],Connection::find()->select('connection_name')->indexBy('id')->column()),
+                        'options' => ['placeholder' => 'Select Connection ...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                ]); ?>
+                
         <div class="panel panel-default panel-body">
             <?= $form->field($model, 'query')->widget('trntv\aceeditor\AceEditor',[
                     'mode'=>'sql',

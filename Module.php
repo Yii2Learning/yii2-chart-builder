@@ -13,6 +13,9 @@ class Module extends \yii\base\Module
     public $controllerNamespace = 'yii2learning\chartbuilder\controllers';
 
     public $defaultRoute = 'chart';
+
+    public $secretKey = 'dixon';
+
     /**
      * @inheritdoc
      */

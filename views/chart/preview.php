@@ -21,7 +21,6 @@ $this->params['breadcrumbs'][] = 'แก้ไข';
 <?= $this->render('_menus',['model'=>$model]) ?>
 
 <div class="panel panel-default panel-body">
-
 <?= ChartBuilder::widget([
             'chartId' => $model->id,
             'model' => $model,
@@ -39,6 +38,16 @@ $this->params['breadcrumbs'][] = 'แก้ไข';
                     <?= $form->field($model, 'chart_type')->inline()->radioList(ChartType::find()->select('name')->indexBy('code')->column()); ?>
             </div>
        </div>
+
+    <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'sub_title')->textInput(['maxlength' => true]) ?>
+            </div>
+       </div>
+
     <div class="row">
             <div class="col-md-6">
                 <?= $form->field($model, 'xaxis_label')->textInput(['maxlength' => true]) ?>

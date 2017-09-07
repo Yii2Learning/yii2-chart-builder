@@ -14,6 +14,7 @@
         "2amigos/yii2-chartjs-widget": "~2.0",
         "miloschuman/yii2-highcharts-widget": "^5.0",
         "trntv/yii2-aceeditor": "^2.0.0",
+        "kartik-v/yii2-widget-select2": "@dev",
         "kartik-v/yii2-grid": "@dev",
         "vova07/yii2-imperavi-widget": "*"
     },

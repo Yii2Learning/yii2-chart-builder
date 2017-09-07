@@ -54,7 +54,22 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'is_kpi',
             // 'params:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'options'=>['style'=>'width:150px;'],
+                'buttonOptions'=>['class'=>'btn btn-default'],
+                'template'=>'<div class="btn-group btn-group-sm text-center" role="group"> {duplicate} {view} {update} {delete} </div>',
+                'buttons'=>[
+                    'duplicate'=>function($url, $model, $key){
+                        return Html::a('<i class="glyphicon glyphicon-copy"></i>',['duplicate','id'=>$model->id],[
+                            'class'=>'btn btn-default',
+                            'title'=>'copy',
+                            'aria-label'=>'copy',
+                            'data-pjax'=>'0'
+                            ]);
+                    }
+                ]
+             ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

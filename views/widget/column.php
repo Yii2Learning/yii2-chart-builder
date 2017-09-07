@@ -8,7 +8,10 @@ echo Highcharts::widget([
     'chart'=>[
       'type'=>'column'
     ],
-    'title' => ['text' => $title],
+    'title' => ['text' => $model->title],
+    'subtitle'=> [
+      'text' => $model->sub_title
+    ],
     'xAxis' => [
       'categories' => $model->getColumnXAxis(),
       'title'=> [

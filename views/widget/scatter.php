@@ -9,9 +9,9 @@ use yii\widgets\Pjax;
           'type' => 'scatter',
           'zoomType'=> 'xy'
         ],
-        'title' => ['text' => $title],
+        'title' => ['text' => $model->title],
         'subtitle'=> [
-          'text' => null
+          'text' => $model->sub_title
         ],
         'tooltip' => [
             'headerFormat' => '<span style="">{series.name}</span><br>',
