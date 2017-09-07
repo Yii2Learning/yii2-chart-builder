@@ -93,10 +93,12 @@ $this->params['breadcrumbs'][] = 'แก้ไข';
     </div>
     <?php ActiveForm::end(); ?>
     </div>
-
-
-
-
+    เรียกใช้งาน
+    <pre>
+        <?=htmlspecialchars('<?=') ?> \yii2learning\chartbuilder\ChartBuilder::widget([
+            'chartId' => '<?=$model->id?>',
+        ]);<?=htmlspecialchars('?>') ?>
+    </pre>
   <div class="panel panel-default panel-body">
   <?php if(!empty($dataProvider)): ?>    
             <?= GridView::widget([
@@ -106,6 +108,12 @@ $this->params['breadcrumbs'][] = 'แก้ไข';
             ?>
         <?php  endif;?>
   </div>
+
+
+
+  
+
+
 
 
 
