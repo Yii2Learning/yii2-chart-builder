@@ -33,7 +33,6 @@ use  yii2learning\chartbuilder\models\Datasource;
  * @property string $updated_at
  * @property integer $created_by
  * @property integer $updated_by
- * @property string $hospcode
  * @property string $query
  * @property double $result
  * @property double $target_value
@@ -168,7 +167,6 @@ class Chart extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
             'created_by' => Yii::t('app', 'Created By'),
             'updated_by' => Yii::t('app', 'Updated By'),
-            'hospcode' => Yii::t('app', 'Hospcode'),
             'query' => Yii::t('app', 'Query'),
             'result' => Yii::t('app', 'Result'),
             'target_value' => Yii::t('app', 'Target Value'),

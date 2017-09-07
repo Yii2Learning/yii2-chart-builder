@@ -90,14 +90,21 @@ if(!empty($filterModel)):
     ]); 
 endif;?>
 <br>
+
 <div class="panel panel-default panel-body">
     <?php if(!empty($dataProvider)): 
-            echo GridView::widget([
-                'id'=>'gridview-datasource',
-                'pjax'=>true,
-                'dataProvider' => $dataProvider,
-                'tableOptions' => ['class'=>'table table-striped'],
-            ]); 
+                try {
+                    echo kartik\grid\GridView::widget([
+                        'pjax'=>true,
+                        'responsive'=>true,
+                        'hover'=>true,
+                        'dataProvider' => $dataProvider,
+                        'bordered'=>false,
+                        'striped' =>true
+                    ]); 
+                } catch(\yii\db\Exception $e) {
+                    Yii::$app->session->setFlash('error', $e->getMessage());
+                }
             ?>
         <?php   endif;?>
 </div>

@@ -99,15 +99,24 @@ $this->params['breadcrumbs'][] = 'แก้ไข';
             'chartId' => '<?=$model->id?>',
         ]);<?=htmlspecialchars('?>') ?>
     </pre>
-  <div class="panel panel-default panel-body">
-  <?php if(!empty($dataProvider)): ?>    
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'tableOptions' => ['class'=>'table table-striped']
-            ]); 
+
+    <div class="panel panel-default panel-body">
+    <?php if(!empty($dataProvider)): 
+                try {
+                    echo kartik\grid\GridView::widget([
+                        'pjax'=>true,
+                        'responsive'=>true,
+                        'hover'=>true,
+                        'dataProvider' => $dataProvider,
+                        'bordered'=>false,
+                        'striped' =>true
+                    ]); 
+                } catch(\yii\db\Exception $e) {
+                    Yii::$app->session->setFlash('error', $e->getMessage());
+                }
             ?>
-        <?php  endif;?>
-  </div>
+        <?php   endif;?>
+</div>
 
 
 

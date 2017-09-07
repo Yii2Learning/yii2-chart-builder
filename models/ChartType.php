@@ -9,6 +9,8 @@ use Yii;
  *
  * @property string $code
  * @property string $name
+ * @property string $options
+ * @property string $widget_classname
  * @property string $image
  * @property integer $sort
  */
@@ -31,7 +33,7 @@ class ChartType extends \yii\db\ActiveRecord
             [['code'], 'required'],
             [['sort'], 'integer'],
             [['code'], 'string', 'max' => 100],
-            [['name', 'image'], 'string', 'max' => 255],
+            [['name', 'image','widget_classname'], 'string', 'max' => 255],
         ];
     }
 

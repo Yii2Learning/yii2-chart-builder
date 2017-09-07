@@ -18,7 +18,7 @@ class ChartSearch extends Chart
     public function rules()
     {
         return [
-            [['id', 'name', 'detail', 'chart_type', 'datasource_id', 'datasource_type', 'tag_name', 'display_type', 'result_id', 'created_at', 'updated_at', 'hospcode', 'query', 'condition', 'options', 'xaxis', 'xaxis_label', 'series', 'yaxis_label', 'title', 'sub_title', 'latest_data', 'params'], 'safe'],
+            [['id', 'name', 'detail', 'chart_type', 'datasource_id', 'datasource_type', 'tag_name', 'display_type', 'result_id', 'created_at', 'updated_at', 'query', 'condition', 'options', 'xaxis', 'xaxis_label', 'series', 'yaxis_label', 'title', 'sub_title', 'latest_data', 'params'], 'safe'],
             [['created_by', 'updated_by', 'stacked'], 'integer'],
             [['result', 'target_value'], 'number'],
         ];
@@ -78,7 +78,6 @@ class ChartSearch extends Chart
             ->andFilterWhere(['like', 'tag_name', $this->tag_name])
             ->andFilterWhere(['like', 'display_type', $this->display_type])
             ->andFilterWhere(['like', 'result_id', $this->result_id])
-            ->andFilterWhere(['like', 'hospcode', $this->hospcode])
             ->andFilterWhere(['like', 'query', $this->query])
             ->andFilterWhere(['like', 'condition', $this->condition])
             ->andFilterWhere(['like', 'options', $this->options])

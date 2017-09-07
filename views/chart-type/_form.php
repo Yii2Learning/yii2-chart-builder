@@ -12,9 +12,21 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+        <div class="col-md-6"><?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?></div>
+        <div class="col-md-6">    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?></div>
+    </div>
+    <?= $form->field($model, 'widget_classname')->textInput(['maxlength' => true]) ?>
+    <div class="panel panel-default panel-body">
+        <?= $form->field($model, 'options')->widget('trntv\aceeditor\AceEditor',[
+                'mode'=>'php',
+                'theme'=>'github',
+                'containerOptions'=>[
+                    'style' => 'width: 100%; min-height: 300px'
+                ]
+                //'readOnly' => true
+            ]) ?>
+        </div>
 
     <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 
