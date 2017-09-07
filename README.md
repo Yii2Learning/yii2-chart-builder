@@ -21,11 +21,19 @@ or add
 
 to the require section of your `composer.json` file.
 
-
-Usage
+Config Module
+-----
+```
+'modules' => [
+    'chartbuilder'=>[
+        'class'=> 'yii2learning\chartbuilder\Module'
+    ],
+];
+```
+Migrations database
 -----
 
-Once the extension is installed, simply use it in your code by  :
-
 ```php
-<?= \yii2learning\AutoloadExample::widget(); ?>```
+./yii migrate/up -p=@yii2learning/chartbuilder/migrations
+```
+
