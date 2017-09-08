@@ -6,15 +6,15 @@ use yii\bootstrap\Nav;
     'encodeLabels' => false,
     'items' => [
         [
-            'label' => '<i class="glyphicon glyphicon-list"></i>  รายละเอียดรายงาน',
+            'label' => '<i class="glyphicon glyphicon-list"></i>  Detail',
             'url' => ['/chartbuilder/chart/update','id'=>$model->id]
         ],
         [
-            'label' => '<i class="glyphicon glyphicon-tasks"></i> แหล่งข้อมูล ',
+            'label' => '<i class="glyphicon glyphicon-tasks"></i> Datasource ',
             'url' => ['/chartbuilder/chart/datasource','id'=>$model->id],
         ],
         [
-            'label' => '<i class="glyphicon glyphicon-signal"></i> แสดงตัวอย่าง',
+            'label' => '<i class="glyphicon glyphicon-signal"></i> Preview',
             'url' => ['/chartbuilder/chart/preview','id'=>$model->id],
         ],
     ],
