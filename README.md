@@ -16,7 +16,7 @@ php composer.phar require --prefer-dist yii2learning/yii2-chart-builder "*"
 or add
 
 ```
-    "yii2learning/yii2-chart-builder": "dev-master"
+   "yii2learning/yii2-chart-builder": "@dev"
 ```
 
 to the require section of your `composer.json` file.
