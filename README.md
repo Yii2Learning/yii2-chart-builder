@@ -28,6 +28,9 @@ Config Module
     'chartbuilder'=>[
         'class'=> 'yii2learning\chartbuilder\Module'
     ],
+    'gridview' =>  [
+        'class' => '\kartik\grid\Module',
+    ]
 ];
 ```
 Migrations database

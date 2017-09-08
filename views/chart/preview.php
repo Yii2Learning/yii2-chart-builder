@@ -5,7 +5,7 @@ use yii\bootstrap\ActiveForm;
 use kartik\select2\Select2;
 use kartik\depdrop\DepDrop;
 use  yii2learning\chartbuilder\ChartBuilder;
-use  frontend\modules\dashboard\models\ChartType;
+use  yii2learning\chartbuilder\models\ChartType;
 use miloschuman\highcharts\Highcharts;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
