@@ -12,7 +12,7 @@
         "yiisoft/yii2": "*",
         "thamtech/yii2-uuid": "^v1.0.2",
         "2amigos/yii2-chartjs-widget": "~2.0",
-        "kartik-v/yii2-date-range": "dev-master",
+        "kartik-v/yii2-date-range": "^1.6.8",
         "miloschuman/yii2-highcharts-widget": "^5.0",
         "trntv/yii2-aceeditor": "^2.0.0",
         "kartik-v/yii2-widget-select2": "@dev",
