@@ -81,7 +81,8 @@ class ChartController extends Controller
      public function actionCreate()
      {
          $model = new Chart([
-             'scenario' => Chart::SCENARIO_DETAIL
+             'scenario' => Chart::SCENARIO_DETAIL,
+             'chart_type' => 'Area'
          ]);
  
          if ($model->load(Yii::$app->request->post()) && $model->save()) {
