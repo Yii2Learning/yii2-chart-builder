@@ -35,7 +35,7 @@ class ChartController extends Controller
                  'rules' => [
                      [
                          'allow' => true,
-                         'roles' => ['User'],
+                         'roles' => ['@'],
                      ],
                  ],
              ]
