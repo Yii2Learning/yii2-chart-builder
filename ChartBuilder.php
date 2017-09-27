@@ -68,7 +68,7 @@ class ChartBuilder extends Widget
     {
             if(!empty($this->getChartType())){
                 $view = $this->getChartType();
-                return $this->render("/widget/".$view,[
+                return $this->render("widget/".$view,[
                     'chartId' => $this->chartId,
                     'model'=> $this->model,
                     'title'=> $this->title
